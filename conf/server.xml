@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<Server port="8005" shutdown="SHUTDOWN">
-    <Service name="Catalina">
-        <Connector port="85" protocol="HTTP/1.1" connectionTimeout="20000" />
-        <Engine name="Catalina">
-            <Host name="localhost">
-                <Context path="blog" reloadable="true" docBase="C:\work\web-demo-doc" />
-            </Host>
-        </Engine>
-    </Service>
+<Server>
+    <Connector port="8085" protocol="HTTP/1.1"/>
+    <Host name="localhost">
+        <Context path="blog" docBase="D:\Programming Projects\TomcatClone\webapps\Blog"/>
+    </Host>
 </Server>

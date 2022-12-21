@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class HttpServletResponse implements ServletResponse {
+public class HttpServletResponse {
     Socket conn;
     HashMap<String, String> headers = new HashMap<>();
     STATUS_CODE status;
@@ -24,56 +24,47 @@ public class HttpServletResponse implements ServletResponse {
         this.conn = conn;
     }
 
-    @Override
     public void sendError(STATUS_CODE code) throws IOException {
         status = code;
         Writer writer = getWriter();
         writer.write("There was an error: " + code);
+        writer.flush();
     }
 
-    @Override
     public OutputStream getOutputStream() throws IOException {
         sendHeaders();
         return conn.getOutputStream();
     }
 
-    @Override
     public String getContentType() {
         return contentType;
     }
 
-    @Override
     public void setContentType(String contentType) {
         this.contentType = contentType;
     }
 
-    @Override
     public Writer getWriter() throws IOException {
         sendHeaders();
         return new OutputStreamWriter(getOutputStream());
     }
 
-    @Override
     public int getStatus() {
         return status.value;
     }
 
-    @Override
     public void setStatus(int status) {
         this.status = STATUS_CODE.fromValue(status);
     }
 
-    @Override
     public void setHeaders(String header, String value) {
         headers.put(header, value);
     }
 
-    @Override
     public void addCookie(Cookie cookie) {
         cookies.add(cookie);
     }
 
-    @Override
     public void sendHeaders() throws IOException {
         OutputStream clientOutput = conn.getOutputStream();
         clientOutput.write((protocol + " " + status + "\r\n").getBytes());

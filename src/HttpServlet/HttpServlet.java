@@ -27,6 +27,7 @@ public abstract class HttpServlet {
             case POST -> doPost(request, response);
             case PUT -> doPut(request, response);
             case DELETE -> doDelete(request, response);
+            default -> response.sendError(STATUS_CODE.METHOD_NOT_ALLOWED);
         }
     }
 
