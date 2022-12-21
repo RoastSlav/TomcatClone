@@ -3,9 +3,14 @@ package HttpServlet;
 import java.util.HashMap;
 
 public class ServletContext {
+    private final String name;
     private String contextPath;
     HashMap<String, Object> attributes = new HashMap<>();
     HashMap<String, String> params = new HashMap<>();
+
+    public ServletContext(String name) {
+        this.name = name;
+    }
 
     public String getContextPath() {
         return contextPath;
