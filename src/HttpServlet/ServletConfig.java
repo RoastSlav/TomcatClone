@@ -16,6 +16,7 @@ import java.nio.file.Path;
 import java.util.HashMap;
 
 public class ServletConfig {
+    private static final ServletConfig instance = new ServletConfig();
     private static final int DEFAULT_THREAD_COUNT = 1;
     private static final int DEFAULT_PORT = 8085;
     private static final Logger logger = Logger.getLogger(ServletConfig.class);
@@ -65,6 +66,10 @@ public class ServletConfig {
             String docBase = docBaseNode.getNodeValue();
             contexts.put(path, new ServletContext(path, docBase));
         }
+    }
+
+    protected static ServletConfig getInstance() {
+        return instance;
     }
 
     public static ServletContext getServletContext(String name) {
